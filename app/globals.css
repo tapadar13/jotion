@@ -78,4 +78,7 @@ body. :root {
   body {
     @apply bg-background text-foreground;
   }
+  body {
+    @apply bg-background text-foreground;
+  }
 }
