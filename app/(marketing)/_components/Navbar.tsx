@@ -44,9 +44,9 @@ export const Navbar = () => {
             <UserButton afterSignOutUrl="/" />
           </>
         )}
-        <Button variant="ghost" size="sm">
-          <ModeToggle />
-        </Button>
+        {/* <Button variant="ghost" size="sm">
+        </Button> */}
+        <ModeToggle />
       </div>
     </div>
   );
