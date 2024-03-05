@@ -1,7 +1,7 @@
 "use client";
 
-import { useQuery } from "convex/react";
-import { Search, Undo } from "lucide-react";
+import { useMutation, useQuery } from "convex/react";
+import { Search, Trash, Undo } from "lucide-react";
 
 import { api } from "@/convex/_generated/api";
 import { Spinner } from "@/components/spinner";
@@ -9,8 +9,8 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Id } from "@/convex/_generated/dataModel";
-import { restore } from "@/convex/documents";
 import { toast } from "sonner";
+import { ConfirmModal } from "@/components/modals/confirm-modal";
 
 export const TrashBox = () => {
   const router = useRouter();
@@ -18,6 +18,8 @@ export const TrashBox = () => {
   const [search, setSearch] = useState("");
 
   const documents = useQuery(api.documents.getTrash);
+  const restore = useMutation(api.documents.restore);
+  const remove = useMutation(api.documents.remove);
 
   const filteredDocuments = documents?.filter((document) => {
     return document.title.toLowerCase().includes(search.toLowerCase());
@@ -39,6 +41,20 @@ export const TrashBox = () => {
       success: "Note restored!",
       error: " Failed to restore note.",
     });
+  };
+
+  const onRemove = (documentId: Id<"documents">) => {
+    const promise = remove({ id: documentId });
+
+    toast.promise(promise, {
+      loading: "Deleting note...",
+      success: "Note deleted!",
+      error: " Failed to delete note.",
+    });
+
+    if (params.documentId === documentId) {
+      router.push("/documents");
+    }
   };
 
   if (documents === undefined) {
@@ -80,6 +96,14 @@ export const TrashBox = () => {
               >
                 <Undo className="h-4 w-4 text-muted-foreground" />
               </div>
+              <ConfirmModal onConfirm={() => onRemove(document._id)}>
+                <div
+                  role="button"
+                  className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+                >
+                  <Trash className="h-4 w-4 text-muted-foreground" />
+                </div>
+              </ConfirmModal>
             </div>
           </div>
         ))}

@@ -2,7 +2,6 @@ import { ElementRef, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 
-import { cn } from "@/lib/utils";
 import {
   ChevronsLeft,
   MenuIcon,
@@ -12,6 +11,7 @@ import {
   Settings,
   Trash,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 import UserItem from "./user-item";
 import { useMutation } from "convex/react";
