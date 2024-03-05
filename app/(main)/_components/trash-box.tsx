@@ -1,13 +1,16 @@
 "use client";
 
 import { useQuery } from "convex/react";
-import { Search } from "lucide-react";
+import { Search, Undo } from "lucide-react";
 
 import { api } from "@/convex/_generated/api";
 import { Spinner } from "@/components/spinner";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { Id } from "@/convex/_generated/dataModel";
+import { restore } from "@/convex/documents";
+import { toast } from "sonner";
 
 export const TrashBox = () => {
   const router = useRouter();
@@ -22,6 +25,20 @@ export const TrashBox = () => {
 
   const onClick = (documentId: string) => {
     router.push(`/documents/${documentId}`);
+  };
+
+  const onRestore = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    documentId: Id<"documents">
+  ) => {
+    event.stopPropagation();
+    const promise = restore({ id: documentId });
+
+    toast.promise(promise, {
+      loading: "Restoring note...",
+      success: "Note restored!",
+      error: " Failed to restore note.",
+    });
   };
 
   if (documents === undefined) {
@@ -55,6 +72,15 @@ export const TrashBox = () => {
             className="text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
           >
             <span className="truncate pl-2">{document.title}</span>
+            <div className="flex items-center">
+              <div
+                onClick={(e) => onRestore(e, document._id)}
+                role="button"
+                className="rounded-sm p-2 hover:bg-neutral-200 dark:hover:bg-neutral-600"
+              >
+                <Undo className="h-4 w-4 text-muted-foreground" />
+              </div>
+            </div>
           </div>
         ))}
       </div>
