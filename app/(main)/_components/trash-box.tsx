@@ -5,9 +5,19 @@ import { Search } from "lucide-react";
 
 import { api } from "@/convex/_generated/api";
 import { Spinner } from "@/components/spinner";
+import { useParams, useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const TrashBox = () => {
+  const router = useRouter();
+  const params = useParams();
+  const [search, setSearch] = useState("");
+
   const documents = useQuery(api.documents.getTrash);
+
+  const filteredDocuments = documents?.filter((document) => {
+    return document.title.toLowerCase().includes(search.toLowerCase());
+  });
 
   if (documents === undefined) {
     return (
@@ -26,6 +36,15 @@ export const TrashBox = () => {
         <p className="hidden last:block text-xs text-center text-muted-foreground pb-2">
           No documents found.
         </p>
+        {filteredDocuments?.map((document) => (
+          <div
+            key={document._id}
+            role="button"
+            className="text-sm rounded-sm w-full hover:bg-primary/5 flex items-center text-primary justify-between"
+          >
+            <span className="truncate pl-2">{document.title}</span>
+          </div>
+        ))}
       </div>
     </div>
   );
