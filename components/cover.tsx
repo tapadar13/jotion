@@ -27,6 +27,12 @@ export const Cover = ({ url, preview }: CoverImageProps) => {
   const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
   const onRemove = async () => {
+    if (url) {
+      await edgestore.publicFiles.delete({
+        url: url,
+      });
+    }
+
     removeCoverImage({
       id: params.documentId as Id<"documents">,
     });
