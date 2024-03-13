@@ -1,5 +1,5 @@
 import { ElementRef, useEffect, useRef, useState } from "react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 
 import {
@@ -31,6 +31,7 @@ import Navbar from "./Navbar";
 
 const Navigation = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const params = useParams();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const create = useMutation(api.documents.create);
@@ -121,6 +122,8 @@ const Navigation = () => {
   const handleCreate = () => {
     const promise = create({
       title: "Untitled",
+    }).then((documentId) => {
+      router.push(`/documents/${documentId}`);
     });
 
     toast.promise(promise, {
