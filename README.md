@@ -1,36 +1,97 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Jotion 📝:
 
-## Getting Started
+A full-stack versatile web application that serves as an all-in-one workspace for note-taking and collaboration, inspired by Notion. Built using Next.js, Typescript, Convex and TailwindCSS.
 
-First, run the development server:
+![Jotion](/public/jotion.png)
+
+## Tech Stack 📚:
+
+- `Next.js` 14.1.0
+- `Convex` 1.9.1
+- `TypeScript` 5
+- `Bloknote` 0.9.4
+- `Edge Store` 0.1.6
+- `Clerk` 4.30.5
+- `Zustand` 4.5.2
+- `TailwindCSS` 3.3.0 and its plugins
+- `EsLint` 8
+- [Vercel](https://vercel.com/)
+
+## Features 🎉:
+
+- **Real-time database** 🔗
+- **Notion-style editor** 📝
+- **Light and Dark mode** 🌓
+- **Infinite nested documents** 🌲
+- **Trash can & soft delete** 🗑️
+- **Authentication** 🔐
+- **File upload**
+- **File deletion**
+- **File replacement**
+- **Icons for each document (changes in real-time)** 🌠
+- **Expandable sidebar** ➡️🔀⬅️
+- **Full mobile responsiveness** 📱
+- **Publish your note to the web** 🌐
+- **Fully collapsable sidebar** ↕️
+- **Landing page** 🛬
+- **Cover image of each document** 🖼️
+- **Recover deleted files** 🔄📄
+
+## Scripts 📜:
+
+- `dev`: Start development server
+- `build`: Build for production
+- `start`: Start production server
+- `lint`: Lint code
+
+## Inspiration 🎨:
+
+Inspired by [Notion](https://www.notion.so/)'s design.
+
+## Contributing 🤝:
+
+Contributions are welcome! If you find any bugs or have suggestions for improvements, please open an issue or submit a pull request on the GitHub repository.
+To contribute to this project, please follow these steps:
+
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Make your changes and commit them.
+- Push your changes to your fork.
+- Submit a pull request.
+
+## Setting up locally
+
+### 1. Clone on your local machine
+
+```bash
+https://github.com/tapadar13/jotion.git
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Add environment variables to your `.env.local` file
+
+```
+CONVEX_DEPLOYMENT=
+
+NEXT_PUBLIC_CONVEX_URL=
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
+
+EDGE_STORE_ACCESS_KEY=
+EDGE_STORE_SECRET_KEY=
+```
+
+### 5. Run on your local server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx convex dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+If you have read all of this, please star the repo, it will help me a lot ❤️
